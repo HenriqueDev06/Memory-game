@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 const Home: FC = () => (
   <Container>
-    <p>first page works! </p>
+    <p>first page works! a </p>
   </Container>
 );
 
