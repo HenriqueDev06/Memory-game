@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 
 import { Container } from './styles';
+import GameComponent from '../../components/gameComponent';
 
 const Home: FC = () => (
   <Container>
-    <p>first page works! a </p>
+    <GameComponent />
   </Container>
 );
 
