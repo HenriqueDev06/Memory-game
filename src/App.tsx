@@ -6,15 +6,7 @@ import GlobalStyle from './styles/globalStyles';
 const App: FC = () => (
   <>
     <BrowserRouter>
-      <Route
-        render={(routeProps) => (
-          <Routes
-          // history={routeProps.history}
-          // location={routeProps.location}
-          // match={routeProps.match}
-          />
-        )}
-      />
+      <Route render={(routeProps) => <Routes />} />
     </BrowserRouter>
     <GlobalStyle />
   </>
