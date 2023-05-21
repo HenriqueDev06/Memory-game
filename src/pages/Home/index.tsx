@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
-import { Container } from './styles';
-import GameComponent from '../../components/gameComponent';
+import { Container } from "./styles";
 
 const Home: FC = () => (
   <Container>
-    <GameComponent />
+    <p>Home</p>
   </Container>
 );
 

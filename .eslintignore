@@ -1,4 +1,6 @@
 /*.js
+/*.tsx
+/*.ts
 **/*.js
 node_modules
 build

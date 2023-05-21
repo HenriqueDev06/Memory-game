@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-
 import { GameContainer } from "./styles";
-
 import Board from "../board";
 import Card from "../card";
-
 import { cardsData } from "../../data/gameCardsData";
 
 interface Card {
@@ -21,14 +18,26 @@ interface GameStats {
 
 const GameComponent: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);
+  const [isFlipping, setIsFlipping] = useState(false);
   const [gameStats, setGameStats] = useState<GameStats>({
     totalMoves: 0,
     matchedPairs: 0,
   });
 
   useEffect(() => {
-    setCards(cardsData);
+    setCards(shuffleArray(cardsData));
   }, []);
+
+  const shuffleArray = (array: any[]) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = newArray[i];
+      newArray[i] = newArray[j];
+      newArray[j] = temp;
+    }
+    return newArray;
+  };
 
   const updateCardMatched = (image: string, matched: boolean) => {
     setCards((prevCards) =>
@@ -52,10 +61,14 @@ const GameComponent: React.FC = () => {
         flippedCards.includes(card) ? { ...card, flipped: false } : card
       );
       setCards(updatedCards);
+      setIsFlipping(false);
     }, 1000);
   };
 
   const handleCardClick = (id: number) => {
+    if (isFlipping) return;
+
+    setIsFlipping(true);
     setGameStats((prevStats) => ({
       ...prevStats,
       totalMoves: prevStats.totalMoves + 1,
@@ -70,16 +83,22 @@ const GameComponent: React.FC = () => {
 
       if (firstCard.image === secondCard.image) {
         updateCardMatched(firstCard.image, true);
+        setIsFlipping(false);
       } else {
         unflipCards(flippedCards);
       }
+    } else {
+      setIsFlipping(false);
     }
   };
 
   const getGameStats = () => {
     const matchedPairs = cards.filter((card) => card.matched).length / 2;
-
     return { ...gameStats, matchedPairs };
+  };
+
+  const checkGameWin = () => {
+    return gameStats.matchedPairs === cardsData.length / 2;
   };
 
   useEffect(() => {
@@ -87,9 +106,8 @@ const GameComponent: React.FC = () => {
   }, [cards]);
 
   useEffect(() => {
-    if (gameStats.matchedPairs === cards.length / 2) {
-      console.log("Parabéns, você ganhou o jogo!");
-      // Aqui você pode adicionar lógica adicional para exibir uma mensagem de vitória ou realizar outras ações necessárias.
+    if (checkGameWin()) {
+      console.log("Parabéns! Você venceu o jogo!");
     }
   }, [gameStats]);
 
