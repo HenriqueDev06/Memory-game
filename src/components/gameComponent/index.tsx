@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { GameContainer } from "./styles";
+import { useNavigate, useParams, RouterProps } from "react-router-dom";
+
+import { GameContainer, StatusContainer } from "./styles";
 import Board from "../board";
 import Card from "../card";
-import { cardsData } from "../../data/gameCardsData";
+import { GameData } from "../../data/gameCardsData";
 
 interface Card {
   id: number;
@@ -24,8 +26,13 @@ const GameComponent: React.FC = () => {
     matchedPairs: 0,
   });
 
+  const { theme } = useParams();
+
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setCards(shuffleArray(cardsData));
+    console.log(GameData[theme]);
+    setCards(shuffleArray(GameData[theme]));
   }, []);
 
   const shuffleArray = (array: any[]) => {
@@ -98,7 +105,7 @@ const GameComponent: React.FC = () => {
   };
 
   const checkGameWin = () => {
-    return gameStats.matchedPairs === cardsData.length / 2;
+    return gameStats.matchedPairs === 10;
   };
 
   useEffect(() => {
@@ -107,13 +114,17 @@ const GameComponent: React.FC = () => {
 
   useEffect(() => {
     if (checkGameWin()) {
-      console.log("Parabéns! Você venceu o jogo!");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
   }, [gameStats]);
 
   return (
     <GameContainer className="game">
-      <h1>Jogo da Memória</h1>
+      <StatusContainer className="bitfont">
+        Pares: {gameStats.matchedPairs} Moves: {gameStats.totalMoves}
+      </StatusContainer>
       <Board cards={cards} handleCardClick={handleCardClick} />
     </GameContainer>
   );

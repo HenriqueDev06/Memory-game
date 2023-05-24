@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import Card from '../card';
-import { BoardContainer } from './styes';
+import Card from "../card";
+import { BoardContainer } from "./styes";
 
 interface Card {
   id: number;
@@ -26,7 +26,6 @@ const Board: React.FC<BoardProps> = ({ cards, handleCardClick }) => {
           onClick={handleCardClick}
         />
       ))}
-      a
     </BoardContainer>
   );
 };

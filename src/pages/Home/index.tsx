@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
 import { Howl } from "howler";
+import { useNavigate } from "react-router-dom";
 
 import {
   Container,
@@ -14,17 +15,17 @@ const sound = new Howl({
   ],
 });
 
-const musicConfig = {
+const music = new Howl({
   src: [
     "https://res.cloudinary.com/dmceve2cp/video/upload/v1684862205/SnapSave.io_-_Fall_Guys__Everybody_Falls_-_8_Bit_Lofi_Hip_Hop_128_kbps_otikra.mp3",
   ],
   loop: true,
-};
-
-const music = new Howl(musicConfig);
+});
 
 const Home: FC = () => {
-  const [selectedTheme, setSelectedTheme] = useState("");
+  const [selectedTheme, setSelectedTheme] = useState("minecraft");
+
+  const navigate = useNavigate();
 
   const handleThemeButtonClick = (themeId: string) => {
     setSelectedTheme(themeId);
@@ -32,6 +33,7 @@ const Home: FC = () => {
   };
 
   useEffect(() => {
+    music.load();
     music.play();
     music.volume(0.4);
 
@@ -42,6 +44,9 @@ const Home: FC = () => {
 
   const handleButtonClick = () => {
     music.fade(0.4, 0, 1000);
+    setTimeout(() => {
+      navigate(`/game/${selectedTheme}`);
+    }, 2000);
   };
 
   return (

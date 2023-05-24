@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import Font8 from "../fonts/DNFBitBitTTF.ttf";
+
 export default createGlobalStyle`
   *{
     margin: 0;
@@ -12,6 +14,15 @@ export default createGlobalStyle`
   button{
     font-family: 'Poppins';
   }
+
+  @font-face {
+    font-family: "MyFont";
+    src: local("MyFont"), url(${Font8}) format("truetype");
+  }
+
+  .bitfont{
+    font-family: "MyFont"
+  } 
 
   *::before,
   *::after {

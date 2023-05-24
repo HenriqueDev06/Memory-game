@@ -1,14 +1,15 @@
 import React, { FC } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
 import { GamePage, Home } from "../pages";
 
-const Routes: FC = () => {
+export const Router: React.FC = () => {
   return (
-    <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/game" exact component={GamePage} />
-    </Switch>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/game/:theme" element={<GamePage />} />
+    </Routes>
   );
 };
 
-export default Routes;
+export default Router;
