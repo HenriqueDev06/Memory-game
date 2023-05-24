@@ -31,7 +31,6 @@ const GameComponent: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(GameData[theme]);
     setCards(shuffleArray(GameData[theme]));
   }, []);
 
