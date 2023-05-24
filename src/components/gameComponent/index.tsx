@@ -31,7 +31,8 @@ const GameComponent: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setCards(shuffleArray(GameData[theme]));
+    const selectedTheme = theme ?? "minecraft";
+    setCards(shuffleArray(GameData[selectedTheme]));
   }, []);
 
   const shuffleArray = (array: any[]) => {
