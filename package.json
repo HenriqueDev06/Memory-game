@@ -1,8 +1,4 @@
 {
-  "resolutions": {
-    "jest/jest-cli/jest-haste-map/sane": "1.2.4",
-    "webpack/watchpack/chokidar/fsevents": "1.2.4"
-  },
   "name": "template_react",
   "version": "0.1.0",
   "private": true,
